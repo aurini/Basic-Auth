@@ -52,12 +52,11 @@ public class MainActivity extends AppCompatActivity {
        final String header = "Basic " + Base64.encodeToString("fhi360:FHI360d@2018".getBytes() , Base64.NO_WRAP);
         authHeader2 = "Basic"+" "+Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
 
-            Call<User> call = UserClient.getClient().create(APIinterface.class).getUser(header);
+            Call<String> call = UserClient.getClient().create(APIinterface.class).getUser(header);
 
-
-            call.enqueue(new Callback<User>() {
+            call.enqueue(new Callback<String>() {
                              @Override
-                             public void onResponse(Call<User> call, Response<User> response) {
+                             public void onResponse(Call<String> call, Response<String> response) {
 
 
                                  String message ="gghgfhg";
@@ -66,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
                                          int p= response.code();
 
 
-                                 Log.e("tag 121",message);
-                                 Log.e("tagg2", m+" \n"+" response"+b +"\n"+"code"+p+ "\n"+authHeader2);
+                                 Log.e("tag 121",response.body());
+                                // Log.e("tagg2", m+" \n"+" response"+b +"\n"+"code"+p+ "\n"+authHeader2);
 
                                  Toast.makeText(MainActivity.this, message,Toast.LENGTH_LONG).show();
 
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                              }
 
                              @Override
-                             public void onFailure(Call<User> call, Throwable t) {
+                             public void onFailure(Call<String> call, Throwable t) {
 
 
                                  Log.e("eror12",  t+"");

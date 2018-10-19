@@ -10,13 +10,14 @@ import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 
 
 public interface APIinterface {
 
-
-    @GET("api/registration/")
-    Call<User> getUser(@Header("Authorization") String header );
+    //@Headers({"Content-Type: application/json"})
+    @POST("/api/registration/")
+    Call<String> getUser(@Header("Authorization") String header );
 
 }
