@@ -44,58 +44,69 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View v) {
 
-            username = "fhi360";
-            password = "FHI360d@2018";
-            String auth= getAuthToken(username, password);
-        String base = username +":"+ password;
+        username = "fhi360";
+        password = "FHI360d@2018";
+        String auth = getAuthToken(username, password);
+        String base = username + ":" + password;
 
-       final String header = "Basic " + Base64.encodeToString("fhi360:FHI360d@2018".getBytes() , Base64.NO_WRAP);
-        authHeader2 = "Basic"+" "+Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
+        final String header = "Basic " + Base64.encodeToString("fhi360`:FHI360d@2018".getBytes(), Base64.NO_WRAP);
+        authHeader2 = "Basic" + " " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
 
-            Call<String> call = UserClient.getClient().create(APIinterface.class).getUser(header);
+        UserRequestClass userRequestClass= new UserRequestClass( "FHI360C023011P420181008", " asdas", "01756144149", "PREGh",
+                "2018-04-10", "IPTSP", "URBAN", "r3",
+                "21", "5", "ClsX below", "O+",
+                "NO", "BARISAL",
+                "JHALOKATI", "JHALOKATI SADAR", "BINOYKATI", "");;
+        Call<User> call = UserClient.getClient().create(APIinterface.class).getUser(header, userRequestClass);
+        call.enqueue(new Callback<User>() {
+                         @Override
+                         public void onResponse(Call<User> call, Response<User> response) {
 
-            call.enqueue(new Callback<String>() {
-                             @Override
-                             public void onResponse(Call<String> call, Response<String> response) {
-
-
-                                 String message ="gghgfhg";
-                                String m= response.headers().toString();
-                                         boolean b=response.isSuccessful();
-                                         int p= response.code();
-
-
-                                 Log.e("tag 121",response.body());
-                                // Log.e("tagg2", m+" \n"+" response"+b +"\n"+"code"+p+ "\n"+authHeader2);
-
-                                 Toast.makeText(MainActivity.this, message,Toast.LENGTH_LONG).show();
-
-
+                             String message ;
+                             if(response.body()!=null) {
+                                message= response.body().getMessage()+"\n"+response.body().getSuccess()+"\n"+response.body().getSubscriberMsisdn();
                              }
-
-                             @Override
-                             public void onFailure(Call<String> call, Throwable t) {
-
-
-                                 Log.e("eror12",  t+"");
-                                 Toast.makeText(MainActivity.this, "Cannot access",Toast.LENGTH_LONG).show();
-
-
+                             else
+                             {
+                                 message="NULL";
                              }
+                             String m = response.headers().toString();
+                             boolean b = response.isSuccessful();
+                             int p = response.code();
+
+
+
+                             Log.e("tag121", response.isSuccessful()+"");
+                             Log.e("tagg2", m + " \n" + " response" + b + "\n" + "code" + p + "\n" + authHeader2);
+                            /* if(message==null)
+                             Log.e("tag33", "I am Null but awesome");*/
+
+                             Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
 
 
                          }
-            );
+
+                         @Override
+                         public void onFailure(Call<User> call, Throwable t) {
 
 
+                             Log.e("eror12", t + "");
+                             Toast.makeText(MainActivity.this, "Cannot access", Toast.LENGTH_LONG).show();
 
+
+                         }
+
+
+                     }
+        );
 
 
     }
-    public static String getAuthToken (String username1, String password1 ){
+
+    public static String getAuthToken(String username1, String password1) {
         byte[] data = new byte[0];
         try {
-            data = (username1+ ":" +password1).getBytes("UTF-8");
+            data = (username1 + ":" + password1).getBytes("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
