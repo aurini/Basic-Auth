@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 "2018-04-10", "IPTSP", "URBAN", "r3",
                 "21", "5", "ClsX below", "O+",
                 "NO", "BARISAL",
-                "JHALOKATI", "JHALOKATI SADAR", "BINOYKATI", "");;
+                "JHALOKATI", "JHALOKATI SADAR", "BINOYKATI", ""); //creating the userRequestClass for raw data and passing it through constructor
         Call<User> call = UserClient.getClient().create(APIinterface.class).getUser(header, userRequestClass);
         call.enqueue(new Callback<User>() {
                          @Override
