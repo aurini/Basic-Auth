@@ -17,9 +17,9 @@ import retrofit2.http.POST;
 
 public interface APIinterface {
 
-    @Headers({"Content-Type: text/html"})
+    @Headers({"Content-Type: text/html"})  //for multiple headers and setting the content type
     @POST("/api/registration/")
-    Call<User> getUser(@Header("Authorization") String header, @Body UserRequestClass userRequestClass);
+    Call<User> getUser(@Header("Authorization") String header, @Body UserRequestClass userRequestClass); //because of raw data 
 
 
 }
