@@ -1,5 +1,13 @@
 package com.example.aurini.signin2;
 
+
+
+/*
+Body object for raw data 
+It is send to the API through object reference of raw data
+
+*/
+
 import retrofit2.http.Field;
 
 public class UserRequestClass {
